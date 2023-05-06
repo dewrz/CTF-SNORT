@@ -69,7 +69,101 @@ alert tcp any any <> any 21 (msg:"Who left FTP open?"; sid:1000002; rev:1;)
 <br>
 <img src="https://i.imgur.com/NKiADL5.jpg">
 <br>
+*For the next few questions, this website has the FTP response codes that will be added to your rules. 
 <br>
+3. Write a rule to detect failed FTP login attempts in the given pcap.
+What is the number of detected packets? 
+<br>
+<br>
+<b>Rule:</b>
+alert tcp any any <> any 21 (msg:”Failed FTP Login”; content:”530 User”; sid:1000003; rev:1;) 
+<br>
+<br>
+<img src="https://i.imgur.com/cLqauNh.jpg">
+<br>
+4. Write a rule to detect successful FTP logins in the given pcap.
+What is the number of detected packets? 
+<br>
+<br>
+<b>Rule:</b>
+alert tcp any any <> any 21 (msg:”Successful FTP Login”; content:”230 User”; sid:1000004; rev:1;) 
+<br>
+<br>
+<img src="https://i.imgur.com/56oAdjQ.jpg">
+<br>
+5. Write a rule to detect failed FTP login attempts with a valid username but a bad password or no password. 
+What is the number of detected packets? 
+<br>
+<br>
+<b>Rule:</b>
+alert tcp any any <> any 21 (msg:”FTP User OK Password Bad”; content:”331 Password”; sid:1000005; rev:1;) 
+<br>
+<br>
+<img src="https://i.imgur.com/HUs35R8.jpg">
+<br>
+6.  Write a rule to detect failed FTP login attempts with "Administrator" username but a bad password or no password. 
+What is the number of detected packets? 
+<br>
+<br>
+<b>Rule:</b>
+alert tcp any any <> any 21 (msg:"FTP Failed Admin Login"; content:"Administrator"; content:"331 Password"; sid:1000006; rev:1;) 
+<br>
+<br>
+<img src="https://i.imgur.com/z4SQeFL.jpg">
+<br>
+<h4>Task 4 Writing IDS Rules (PNG) Questions:</h4>
+<br>
+1. Write a rule to detect the PNG file in the given pcap. 
+Investigate the logs and identify the software name embedded in the packet.
+<br>
+<br>
+<b>Rules:</b>
+alert tcp any any <> any any (msg:"Ping File Found"; content:"|89 50 4E 47 0D 0A 1A 0A|"; sid:100001; rev:1;)
+<br>
+<b>Commands:</b>sudo snort -c local.rules -A full -l . -r ftp-png-gif.pcap
+sudo snort -r snort.log.1683227953 -X 
+<br>
+<br>
+<img src="https://i.imgur.com/r1g8yUB.jpg">
+<br>
+2. Write a rule to detect the GIF file in the given pcap. 
+Investigate the logs and identify the image format embedded in the packet? 
+<br>
+<br>
+<b>Rule:</b>
+alert tcp any any <> any any (msg:"GIF File Found"; content:"GIF89a"; sid:100002; rev:1;) 
+<br>
+<b>Command:</b> sudo snort -r snort.log.1683228823 -X
+<br>
+<br>
+<img src="https://i.imgur.com/wW4Km3i.jpg">
+<br>
+<h4>Task 5 Writing IDS Rules (Torrent Metafile: </h4>
+<br>
+1. Write a rule to detect the torrent metafile in the given pcap. 
+What is the number of detected packets? 
+<br>
+<br>
+<b>Rule:</b>
+alert tcp any any <> any any (msg:"Torrent File Detected"; content:".torrent"; sid:1000001; rev:1;)
+<br>
+<b>Command:</b> sudo snort -c local.rules -A full -l . -r torrent.pcap
+<br>
+<br>
+<img src="https://i.imgur.com/IDOVkVH.jpg">
+<br>
+2. What is the name of the torrent application? 
+<br>
+<br>
+<b>Command:</b>sudo snort –r snort.log.1683231897 -X
+<br>
+<br>
+<img src="https://i.imgur.com/iqkiY3L.jpg">
+<br>
+What is the MIME (Multipurpose Internet Mail Extensions) type of the torrent metafile? 
+<br>
+<br>
+<img src="https://i.imgur.com/XYHbueX.jpg">
 
 
 
